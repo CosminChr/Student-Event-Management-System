@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="100.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="14.0" layoutY="-14.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Label text="Reccur every" />
+            <JFXTextField fx:id="numberOfWeeks" prefHeight="25.0" prefWidth="30.0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXTextField>
+            <Label fx:id="weeklylabel" text="week(s) on:">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="12.0" layoutY="55.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <JFXCheckBox fx:id="mondayCheckbox" text="Monday" />
+            <JFXCheckBox fx:id="tuesdayCheckbox" text="Tuesday">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXCheckBox>
+            <JFXCheckBox fx:id="wednesdayCheckbox" text="Wednesday">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXCheckBox>
+            <JFXCheckBox fx:id="thursdayCheckbox" text="Thursday">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXCheckBox>
+            <JFXCheckBox fx:id="fridayCheckbox" text="Friday">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXCheckBox>
+         </children>
+      </HBox>
+      <HBox layoutX="22.0" layoutY="65.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="95.0">
+         <children>
+            <JFXCheckBox fx:id="saturdayCheckbox" text="Saturday" />
+            <JFXCheckBox fx:id="sundayCheckbox" text="Sunday">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXCheckBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

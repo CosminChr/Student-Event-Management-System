@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="tableView" layoutX="206.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columns>
+            <TableColumn fx:id="title" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="description" prefWidth="75.0" text="Description" />
+            <TableColumn fx:id="eventType" prefWidth="75.0" text="Event type" />
+            <TableColumn fx:id="url" prefWidth="75.0" text="Url" />
+            <TableColumn fx:id="organisation" prefWidth="75.0" text="Organisation" />
+            <TableColumn fx:id="location" prefWidth="75.0" text="Location" />
+            <TableColumn fx:id="isRecurrent" prefWidth="75.0" text="Is recurrent" />
+            <TableColumn fx:id="eventTime" prefWidth="75.0" text="Event time" />
+            <TableColumn fx:id="startTime" prefWidth="75.0" text="Start time" />
+            <TableColumn fx:id="requiresBooking" prefWidth="75.0" text="Requires booking" />
+            <TableColumn fx:id="availableNumberOfPlaces" prefWidth="75.0" text="Available places" />
+            <TableColumn fx:id="numberOfPlaces" prefWidth="75.0" text="Number of places" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <contextMenu>
+            <ContextMenu>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#cancelBooking" text="Cancel" />
+               </items>
+            </ContextMenu>
+         </contextMenu>
+      </TableView>
+   </children>
+</AnchorPane>

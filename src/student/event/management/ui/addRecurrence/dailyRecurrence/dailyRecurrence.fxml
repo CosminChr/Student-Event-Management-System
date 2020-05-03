@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="100.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="14.0" layoutY="-14.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <JFXRadioButton fx:id="everyRadioButton" onAction="#everyRadioButtonChange" text="Every" />
+            <JFXTextField fx:id="numberOfDays" prefHeight="25.0" prefWidth="30.0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXTextField>
+            <Label fx:id="dailyLabel" text="day(s)">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="12.0" layoutY="55.0" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <JFXRadioButton fx:id="everyWeekdayRadioButton" onAction="#everyWeekDayRadioButtonChange" text="Every weekday" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

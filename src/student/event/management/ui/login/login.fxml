@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.event.management.ui.login.LoginController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="141.0" layoutY="14.0" prefHeight="49.0" prefWidth="500.0" text="Login" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <JFXTextField fx:id="username" layoutX="47.0" layoutY="132.0" promptText="Username" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="132.0" />
+      <JFXPasswordField fx:id="password" layoutX="47.0" layoutY="208.0" promptText="Password" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="208.0" />
+      <HBox layoutX="10.0" layoutY="446.0" prefHeight="40.0" prefWidth="480.0" stylesheets="@../addEvent/addEvent.css">
+         <children>
+            <JFXButton onAction="#login" prefHeight="40.0" prefWidth="300.0" text="Login">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <JFXButton onAction="#cancel" prefHeight="40.0" prefWidth="300.0" text="Cancel">
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children>
+      </HBox>
+      <JFXButton fx:id="cancelButton" layoutX="80.0" layoutY="309.0" onAction="#register" prefHeight="40.0" prefWidth="224.0" stylesheets="@login.css" text="Register" />
+      <Label layoutX="47.0" layoutY="275.0" text="                          Don't have an account?" />
+   </children>
+</AnchorPane>
