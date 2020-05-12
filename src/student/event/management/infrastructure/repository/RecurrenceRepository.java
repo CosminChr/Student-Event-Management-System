@@ -36,7 +36,7 @@ public class RecurrenceRepository {
         Optional<Recurrence> recurrenceOptional = findById(recurrence.getId());
         if (recurrenceOptional.isPresent()) {
 
-            String sql = "UPDATE recurrence set startTime = ?, eventId = ?, recurrencePatternId = ?, recurrenceRangeId = ? where id = ?;";
+            String sql = "UPDATE recurrence SET startTime = ?, eventId = ?, recurrencePatternId = ?, recurrenceRangeId = ? WHERE id = ?;";
 
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, formatter.format(recurrence.getStartTime()));
@@ -169,7 +169,7 @@ public class RecurrenceRepository {
 
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
-        String sql = "SELECT * from recurrence r " +
+        String sql = "SELECT * FROM recurrence r " +
                 "JOIN event e ON e.id = r.eventId WHERE e.title = ?";
         stmt = conn.prepareStatement(sql);
         stmt.setString(1, title);

@@ -133,8 +133,8 @@ public class BookingRepository {
         String sql = "SELECT B.id, S.firstName, S.lastName, E.title, E.eventTime, r.startTime, rr.startDate, b.status  FROM BOOKING B " +
                 "JOIN EVENT E ON B.eventId = E.id " +
                 "JOIN STUDENT S ON B.studentId = S.id " +
-                "JOIN recurrence r on E.id = r.eventId " +
-                "JOIN recurrenceRange rr on r.recurrenceRangeId = rr.id";
+                "JOIN recurrence r ON E.id = r.eventId " +
+                "JOIN recurrenceRange rr ON r.recurrenceRangeId = rr.id";
 
         this.stmt = conn.prepareStatement(sql);
         List<BookingDTO> bookings = new ArrayList<>();

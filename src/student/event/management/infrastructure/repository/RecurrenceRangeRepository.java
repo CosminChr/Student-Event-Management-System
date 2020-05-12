@@ -35,7 +35,7 @@ public class RecurrenceRangeRepository {
         Optional<RecurrenceRange> recurrenceRangeOptional = findById(recurrenceRange.getId());
         if (recurrenceRangeOptional.isPresent()) {
 
-            String sql = "UPDATE recurrenceRange set startDate = ?, endByDate = ?, endAfter = ?, noEndDate = ? where id = ?;";
+            String sql = "UPDATE recurrenceRange SET startDate = ?, endByDate = ?, endAfter = ?, noEndDate = ? WHERE id = ?;";
 
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, formatter.format(recurrenceRange.getStartDate()));
@@ -155,7 +155,7 @@ public class RecurrenceRangeRepository {
 
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        String sql = "SELECT * from recurrenceRange rr " +
+        String sql = "SELECT * FROM recurrenceRange rr " +
                 "JOIN recurrence r ON r.recurrenceRangeId = rr.id " +
                 "JOIN event e ON e.id = r.eventId WHERE e.id = ?";
         stmt = conn.prepareStatement(sql);

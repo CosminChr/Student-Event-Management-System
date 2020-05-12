@@ -349,7 +349,7 @@ public class EventRepository {
     public Optional<Event> findByEventTitleAndStudentId(String title, Long studentId) throws SQLException {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        String sql = "SELECT * FROM event e INNER JOIN BOOKING b ON e.id = b.eventId INNER JOIN student s on b.studentId = s.id WHERE s.id = ? AND e.title = ?;";
+        String sql = "SELECT * FROM event e INNER JOIN BOOKING b ON e.id = b.eventId INNER JOIN student s ON b.studentId = s.id WHERE s.id = ? AND e.title = ?;";
 
         this.stmt = conn.prepareStatement(sql);
         this.stmt.setLong(1, studentId);

@@ -234,7 +234,7 @@ public class RecurrencePatternRepository {
      */
     public Optional<RecurrencePattern> findByEvent(Event event) throws SQLException {
 
-        String sql = "SELECT * from recurrencePattern rp " +
+        String sql = "SELECT * FROM recurrencePattern rp " +
                 "JOIN recurrence r ON r.recurrencePatternId = rp.id " +
                 "JOIN event e ON e.id = r.eventId WHERE e.id = ?";
         stmt = conn.prepareStatement(sql);
