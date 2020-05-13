@@ -181,6 +181,14 @@ public class ListEventsAdminBoardController implements Initializable {
             return;
         }
 
+        if (studentEvent.requiresBooking.getValue().equals(YesOrNoEnum.NO.getLabel())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setContentText("This event does not require booking hence it does not have any bookings");
+            alert.showAndWait();
+            return;
+        }
+
         // create an event object, give its title from the tableView and pass it to the loadBookings controller
         student.event.management.domain.models.Event ev = student.event.management.domain.models.Event.builder()
                 .setTitle(studentEvent.getTitle());
