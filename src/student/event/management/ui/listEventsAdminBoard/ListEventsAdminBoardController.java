@@ -13,11 +13,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import student.event.management.application.service.StageService;
-import student.event.management.domain.models.*;
+import student.event.management.domain.models.Booking;
+import student.event.management.domain.models.Recurrence;
+import student.event.management.domain.models.RecurrencePattern;
+import student.event.management.domain.models.RecurrenceRange;
 import student.event.management.domain.util.BookingStatus;
 import student.event.management.domain.util.EventType;
 import student.event.management.infrastructure.repository.*;
-import student.event.management.ui.listStudents.ListStudentsController;
 import student.event.management.ui.util.YesOrNoEnum;
 
 import java.net.URL;
@@ -130,23 +132,20 @@ public class ListEventsAdminBoardController implements Initializable {
 
                             // if the recurrence start date is after the current date
                             // or the dates are equal and the recurrence start time is after the current time
-                            if (recurrenceRange.getEndByDate() != null) {
-                                if ((recurrenceRange.getStartDate().isAfter(LocalDate.now())
-                                        || Period.between(recurrenceRange.getStartDate(), LocalDate.now()).getDays() == 0 && recurrence.getStartTime().isAfter(LocalTime.now()))) {
+                            if ((recurrenceRange.getStartDate().isAfter(LocalDate.now())
+                                    || Period.between(recurrenceRange.getStartDate(), LocalDate.now()).getDays() == 0 && recurrence.getStartTime().isAfter(LocalTime.now()))) {
 
-                                    // get all the bookings of the event
-                                    List<Booking> bookingsForEvent = bookingRepository.findBookingsByEventTitle(event.getTitle());
+                                // get all the bookings of the event
+                                List<Booking> bookingsForEvent = bookingRepository.findBookingsByEventTitle(event.getTitle());
 
-                                    // calculate the number of available places by substracting the number of bookings having the status approved
-                                    Integer numberOfAvailablePlaces = event.isRequiresBooking() ? event.getNumberOfPlaces() - bookingsForEvent.stream()
-                                            .filter(b -> b.getStatus().equals(BookingStatus.APPROVED.getStatus())).collect(toList()).size() : null;
-                                    LocalDateTime startTime = LocalDateTime.of(recurrenceRange.getStartDate(), recurrence.getStartTime());
+                                // calculate the number of available places by substracting the number of bookings having the status approved
+                                Integer numberOfAvailablePlaces = event.isRequiresBooking() ? event.getNumberOfPlaces() - bookingsForEvent.stream()
+                                        .filter(b -> b.getStatus().equals(BookingStatus.APPROVED.getStatus())).collect(toList()).size() : null;
+                                LocalDateTime startTime = LocalDateTime.of(recurrenceRange.getStartDate(), recurrence.getStartTime());
 
-                                    // add the event into the observableList which will be rendered into the tableView
-                                    observableEventList.add(new ListEventsAdminBoardController.Event(event.getTitle(), event.getDescription(), event.getEventType(), event.getUrl(), event.getOrganisation(), event.getLocation(), true, event.getEventTime(), startTime, event.isRequiresBooking(), numberOfAvailablePlaces, event.getNumberOfPlaces()));
-                                }
+                                // add the event into the observableList which will be rendered into the tableView
+                                observableEventList.add(new ListEventsAdminBoardController.Event(event.getTitle(), event.getDescription(), event.getEventType(), event.getUrl(), event.getOrganisation(), event.getLocation(), true, event.getEventTime(), startTime, event.isRequiresBooking(), numberOfAvailablePlaces, event.getNumberOfPlaces()));
                             }
-
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();

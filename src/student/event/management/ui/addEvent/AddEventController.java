@@ -227,10 +227,10 @@ public class AddEventController implements Initializable {
         }
 
         // validate that the fields and comboboxes are not empty
-        if (eventType == null || eventPlace == null || title.isEmpty() || description.isEmpty() || eventType.isEmpty() || EventType.parse(eventType).getType().equals(EventType.ONLINE.getType()) && url.isEmpty()
-                || EventType.parse(eventType).getType().equals(EventType.IN_PERSON.getType()) && EventPlace.parse(eventPlace).getPlace().equals(EventPlace.INTERNAL.getPlace()) && location.isEmpty()
-                || EventType.parse(eventType).getType().equals(EventType.IN_PERSON.getType()) && EventPlace.parse(eventPlace).getPlace().equals(EventPlace.EXTERNAL.getPlace()) && organisation.isEmpty() && location.isEmpty()
-                || eventMoment == null || (requiresBooking && numberOfPlaces.isEmpty())) {
+        if ((eventType == null || title.isEmpty() || description.isEmpty() || eventType.isEmpty() || EventType.parse(eventType).getType().equals(EventType.ONLINE.getType()) && url.isEmpty())
+                || (EventType.parse(eventType).getType().equals(EventType.IN_PERSON.getType()) && EventPlace.parse(eventPlace).getPlace().equals(EventPlace.INTERNAL.getPlace()) && location.isEmpty())
+                || (EventType.parse(eventType).getType().equals(EventType.IN_PERSON.getType()) && EventPlace.parse(eventPlace).getPlace().equals(EventPlace.EXTERNAL.getPlace()) && organisation.isEmpty() && location.isEmpty())
+                || (eventMoment == null || (requiresBooking && numberOfPlaces.isEmpty()))) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Please  enter all required fields");

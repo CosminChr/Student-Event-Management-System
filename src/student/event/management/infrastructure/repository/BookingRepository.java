@@ -130,11 +130,11 @@ public class BookingRepository {
         final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        String sql = "SELECT B.id, S.firstName, S.lastName, E.title, E.eventTime, r.startTime, rr.startDate, b.status  FROM BOOKING B " +
-                "JOIN EVENT E ON B.eventId = E.id " +
-                "JOIN STUDENT S ON B.studentId = S.id " +
-                "JOIN recurrence r ON E.id = r.eventId " +
-                "JOIN recurrenceRange rr ON r.recurrenceRangeId = rr.id";
+        String sql = "SELECT b.id, s.firstName, s.lastName, e.title, r.startTime, rr.startDate, b.status  FROM booking b " +
+                "JOIN event e ON b.eventId = e.id " +
+                "JOIN student s ON b.studentId = s.id " +
+                "JOIN recurrence r ON e.id = r.eventId " +
+                "JOIN recurrenceRange rr ON r.recurrenceRangeId = rr.id;";
 
         this.stmt = conn.prepareStatement(sql);
         List<BookingDTO> bookings = new ArrayList<>();
@@ -144,7 +144,6 @@ public class BookingRepository {
             String studentFirstName = resultSet.getString("firstName");
             String studentLastName = resultSet.getString("lastName");
             String eventTitle = resultSet.getString("title");
-            LocalDateTime eventTime = resultSet.getString("eventTime") != null ? LocalDateTime.parse(resultSet.getString("eventTime"), dateTimeFormatter) : null;
             LocalTime startTime = resultSet.getString("startTime") != null ? LocalTime.parse(resultSet.getString("startTime"), timeFormatter) : null;
             LocalDate startDate = resultSet.getString("startDate") != null ? LocalDate.parse(resultSet.getString("startDate"), dateFormatter) : null;
             BookingStatus bookingStatus = resultSet.getString("status") != null ? BookingStatus.parse(resultSet.getString("status")) : null;
@@ -156,13 +155,38 @@ public class BookingRepository {
                     .setStudentFirstName(studentFirstName)
                     .setStudentLastName(studentLastName)
                     .setEventTitle(eventTitle)
-                    .setRecurrent(start != null ? true : false)
-                    .setEventTime(eventTime)
+                    .setRecurrent(true)
                     .setStartTime(start)
                     .setStatus(bookingStatus);
 
             bookings.add(booking);
         }
+
+        sql = "SELECT b.id, s.firstName, s.lastName, e.title, e.eventTime, b.status  FROM booking b " +
+                "JOIN event e ON b.eventId = e.id " +
+                "JOIN student s ON b.studentId = s.id; ";
+        this.stmt = conn.prepareStatement(sql);
+        resultSet = stmt.executeQuery();
+        while (resultSet.next()) {
+            Long id = resultSet.getLong("id");
+            String studentFirstName = resultSet.getString("firstName");
+            String studentLastName = resultSet.getString("lastName");
+            String eventTitle = resultSet.getString("title");
+            LocalDateTime eventTime = resultSet.getString("eventTime") != null ? LocalDateTime.parse(resultSet.getString("eventTime"), dateTimeFormatter) : null;
+            BookingStatus bookingStatus = resultSet.getString("status") != null ? BookingStatus.parse(resultSet.getString("status")) : null;
+
+            final BookingDTO booking = BookingDTO.builder()
+                    .setId(id)
+                    .setStudentFirstName(studentFirstName)
+                    .setStudentLastName(studentLastName)
+                    .setEventTitle(eventTitle)
+                    .setEventTime(eventTime)
+                    .setRecurrent(false)
+                    .setStatus(bookingStatus);
+
+            bookings.add(booking);
+        }
+
         return bookings;
     }
 

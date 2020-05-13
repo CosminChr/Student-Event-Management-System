@@ -41,7 +41,7 @@ public class EventRepository {
         Optional<Event> eventOptional = findById(event.getId());
         if (eventOptional.isPresent()) {
 
-            String sql = " UPDATE Event " +
+            String sql = " UPDATE event " +
                     " SET title = ?," +
                     " description = ? ," +
                     " eventType = ? ," +
@@ -94,7 +94,7 @@ public class EventRepository {
         if (!eventOptional.isPresent()) {
 
 
-            String sql = "SELECT MAX(ID) FROM EVENT;";
+            String sql = "SELECT MAX(ID) FROM event;";
             stmt = conn.prepareStatement(sql);
             ResultSet resultSet = stmt.executeQuery();
             Long lastId = 0L;
@@ -108,7 +108,7 @@ public class EventRepository {
             stmt.setString(2, event.getTitle());
             stmt.setString(3, event.getDescription());
             stmt.setString(4, event.getEventType().getType());
-            stmt.setString(5, event.getEventPlace().getPlace());
+            stmt.setString(5, event.getEventPlace() != null ? event.getEventPlace().getPlace() : null);
             stmt.setString(6, event.getUrl());
             stmt.setString(7, event.getOrganisation());
             stmt.setString(8, event.getLocation());
@@ -135,7 +135,7 @@ public class EventRepository {
      */
     public Optional<Event> findByTitle(String title) throws SQLException {
 
-        String sql = "SELECT * FROM EVENT WHERE title = ?;";
+        String sql = "SELECT * FROM event WHERE title = ?;";
         this.stmt = conn.prepareStatement(sql);
         this.stmt.setString(1, title);
         ResultSet resultSet = stmt.executeQuery();
@@ -184,7 +184,7 @@ public class EventRepository {
      */
     public Optional<Event> findById(Long id) throws SQLException {
 
-        String sql = "SELECT * FROM EVENT WHERE id = ?;";
+        String sql = "SELECT * FROM event WHERE id = ?;";
         this.stmt = conn.prepareStatement(sql);
         this.stmt.setLong(1, id);
         ResultSet resultSet = stmt.executeQuery();
@@ -232,7 +232,7 @@ public class EventRepository {
      * @throws SQLException
      */
     public boolean deleteByTitle(String title) throws SQLException {
-        String sql = "DELETE FROM Event WHERE title = ?";
+        String sql = "DELETE FROM event WHERE title = ?";
         this.stmt = conn.prepareStatement(sql);
         this.stmt.setString(1, title);
         int result = this.stmt.executeUpdate();
@@ -252,7 +252,7 @@ public class EventRepository {
     public List<Event> findAll() throws SQLException {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        String sql = "SELECT * FROM EVENT;";
+        String sql = "SELECT * FROM event;";
 
         this.stmt = conn.prepareStatement(sql);
         List<Event> events = new ArrayList<>();
@@ -349,7 +349,7 @@ public class EventRepository {
     public Optional<Event> findByEventTitleAndStudentId(String title, Long studentId) throws SQLException {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        String sql = "SELECT * FROM event e INNER JOIN BOOKING b ON e.id = b.eventId INNER JOIN student s ON b.studentId = s.id WHERE s.id = ? AND e.title = ?;";
+        String sql = "SELECT * FROM event e INNER JOIN booking b ON e.id = b.eventId INNER JOIN student s ON b.studentId = s.id WHERE s.id = ? AND e.title = ?;";
 
         this.stmt = conn.prepareStatement(sql);
         this.stmt.setLong(1, studentId);
@@ -443,7 +443,7 @@ public class EventRepository {
     public Optional<Event> findByBookingId(Long id) throws SQLException {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-        String sql = "SELECT * FROM event e INNER JOIN BOOKING b ON e.id = b.eventId WHERE b.id = ?;";
+        String sql = "SELECT * FROM event e INNER JOIN booking b ON e.id = b.eventId WHERE b.id = ?;";
 
         this.stmt = conn.prepareStatement(sql);
         this.stmt.setLong(1, id);

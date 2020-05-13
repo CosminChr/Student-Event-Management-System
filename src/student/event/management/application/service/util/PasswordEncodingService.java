@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 
 public class PasswordEncodingService {
 
-
     /**
      * encode a string using the SHA-256
      *

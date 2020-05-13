@@ -131,23 +131,20 @@ public class ListAllEventsStudentBoardController implements Initializable {
 
                             // if the recurrence start date is after the current date
                             // or the dates are equal and the recurrence start time is after the current time
-                            if (recurrenceRange.getEndByDate() != null) {
-                                if ((recurrenceRange.getStartDate().isAfter(LocalDate.now())
-                                        || Period.between(recurrenceRange.getStartDate(), LocalDate.now()).getDays() == 0 && recurrence.getStartTime().isAfter(LocalTime.now()))) {
+                            if ((recurrenceRange.getStartDate().isAfter(LocalDate.now())
+                                    || Period.between(recurrenceRange.getStartDate(), LocalDate.now()).getDays() == 0 && recurrence.getStartTime().isAfter(LocalTime.now()))) {
 
-                                    // get all the bookings of the event
-                                    List<Booking> bookingsForEvent = bookingRepository.findBookingsByEventTitle(event.getTitle());
+                                // get all the bookings of the event
+                                List<Booking> bookingsForEvent = bookingRepository.findBookingsByEventTitle(event.getTitle());
 
-                                    // calculate the number of available places by substracting the number of bookings having the status approved
-                                    Integer numberOfAvailablePlaces = event.isRequiresBooking() ? event.getNumberOfPlaces() - bookingsForEvent.stream()
-                                            .filter(b -> b.getStatus().getStatus().equals(BookingStatus.APPROVED.getStatus())).collect(toList()).size() : null;
-                                    LocalDateTime startTime = LocalDateTime.of(recurrenceRange.getStartDate(), recurrence.getStartTime());
+                                // calculate the number of available places by substracting the number of bookings having the status approved
+                                Integer numberOfAvailablePlaces = event.isRequiresBooking() ? event.getNumberOfPlaces() - bookingsForEvent.stream()
+                                        .filter(b -> b.getStatus().getStatus().equals(BookingStatus.APPROVED.getStatus())).collect(toList()).size() : null;
+                                LocalDateTime startTime = LocalDateTime.of(recurrenceRange.getStartDate(), recurrence.getStartTime());
 
-                                    // add the event into the observableList which will be rendered into the tableView
-                                    observableEventList.add(new ListAllEventsStudentBoardController.Event(event.getTitle(), event.getDescription(), event.getEventType(), event.getUrl(), event.getOrganisation(), event.getLocation(), true, event.getEventTime(), startTime, event.isRequiresBooking(), numberOfAvailablePlaces, event.getNumberOfPlaces()));
-                                }
+                                // add the event into the observableList which will be rendered into the tableView
+                                observableEventList.add(new ListAllEventsStudentBoardController.Event(event.getTitle(), event.getDescription(), event.getEventType(), event.getUrl(), event.getOrganisation(), event.getLocation(), true, event.getEventTime(), startTime, event.isRequiresBooking(), numberOfAvailablePlaces, event.getNumberOfPlaces()));
                             }
-
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();

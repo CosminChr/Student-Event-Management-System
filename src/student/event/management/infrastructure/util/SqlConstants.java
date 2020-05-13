@@ -9,7 +9,7 @@ public enum SqlConstants {
             + "	title TEXT NOT NULL,\n "
             + "	description TEXT NOT NULL,\n "
             + "	eventType TEXT NOT NULL,\n "
-            + " eventPlace TEXT NOT NULL,\n "
+            + " eventPlace TEXT,\n "
             + " url TEXT,\n "
             + " organisation TEXT,\n "
             + "	location TEXT,\n "

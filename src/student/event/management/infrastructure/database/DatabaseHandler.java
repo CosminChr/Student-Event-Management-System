@@ -23,6 +23,26 @@ public class DatabaseHandler {
     }
 
     /**
+     * get an instance to the database handler
+     *
+     * @return
+     */
+    public static DatabaseHandler getInstance() {
+        return handler;
+    }
+
+    /**
+     * get an instance to the database connection
+     *
+     * @return
+     */
+    public static Connection getConnection() {
+        return conn;
+    }
+
+
+
+    /**
      * set up the database by getting a connection
      * creating the tables if they don't exist
      * and creating the admin if he doesn't exist
@@ -71,26 +91,4 @@ public class DatabaseHandler {
             e.printStackTrace();
         }
     }
-
-
-    /**
-     * get an instance to the database handler
-     *
-     * @return
-     */
-    public static DatabaseHandler getInstance() {
-        return handler;
-    }
-
-
-    /**
-     * get an instance to the database connection
-     *
-     * @return
-     */
-    public static Connection getConnection() {
-        return conn;
-    }
-
-
 }

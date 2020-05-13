@@ -164,7 +164,7 @@ public class RecurrenceRangeRepository {
         if (resultSet.next()) {
             Long id = resultSet.getLong("id");
             LocalDate startDate = LocalDate.parse(resultSet.getString("startDate"), formatter);
-            LocalDate endByDate = LocalDate.parse(resultSet.getString("endByDate"), formatter);
+            LocalDate endByDate = resultSet.getString("endByDate") != null ? LocalDate.parse(resultSet.getString("endByDate"), formatter) : null;
             Integer endAfter = resultSet.getInt("endAfter");
             Boolean noEndDate = Boolean.parseBoolean(resultSet.getString("noEndDate"));
 

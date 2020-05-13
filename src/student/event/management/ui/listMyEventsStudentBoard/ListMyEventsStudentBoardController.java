@@ -132,7 +132,6 @@ public class ListMyEventsStudentBoardController implements Initializable {
 
                             // if the recurrence start date is after the current date
                             // or the dates are equal and the recurrence start time is after the current time
-                            if (recurrenceRange.getEndByDate() != null) {
                                 if ((recurrenceRange.getStartDate().isAfter(LocalDate.now())
                                         || Period.between(recurrenceRange.getStartDate(), LocalDate.now()).getDays() == 0 && recurrence.getStartTime().isAfter(LocalTime.now()))) {
 
@@ -148,7 +147,6 @@ public class ListMyEventsStudentBoardController implements Initializable {
                                     observableEventList.add(new ListMyEventsStudentBoardController.Event(event.getTitle(), event.getDescription(), event.getEventType(), event.getUrl(), event.getOrganisation(), event.getLocation(), true, event.getEventTime(), startTime, event.isRequiresBooking(), numberOfAvailablePlaces, event.getNumberOfPlaces()));
                                 }
                             }
-                        }
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -192,7 +190,6 @@ public class ListMyEventsStudentBoardController implements Initializable {
             eventsFromDatabase.forEach(e -> {
 
                 try {
-
                     // get all the bookings of the event
                     List<Booking> bookingsForEvent = bookingRepository.findBookingsByEventTitle(e.getTitle());
 
